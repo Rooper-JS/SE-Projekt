@@ -18,7 +18,7 @@ dir = dir.substring(0, dir.length - 7);
 
 //GET-Function declaration
 app.get('/', function (req, res) {
-   res.sendFile(path.join(dir + 'index.html'));
+   res.sendFile(path.join(dir + 'se-vue/public/index.html'));
 });
 app.get('/getLessons', getLessons);
 app.get('/getDozenten', getDozenten)
