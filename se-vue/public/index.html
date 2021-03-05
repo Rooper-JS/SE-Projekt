@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>Stundenplan</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/js/main.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <noscript>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>This is index.html :)</h1>
+        </div>
+    </div>
+    <div class="container">
+
+        <select id="selDozent">
+            <option selected value="std">--- Bitte auswählen ---</option>
+        </select>
+        <button id="pullData" onclick="getDataset()">KLICK MICH</button>
+
+    </div>
+
+</body>
+</html>
