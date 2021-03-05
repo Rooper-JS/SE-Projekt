@@ -8,9 +8,7 @@ $(document).ready(function () {
 });
 
 
-//Event-Funktionen
 function getDozenten() {
-    //Event: Click #pullData Button
         
     $.ajax({
 
@@ -41,8 +39,8 @@ function getDozenten() {
 }
 
 
-
 function getDataset() {
+    //Event: Click #pullData Button
 
     //DozentID auslesen
     var ID = $("#selDozent option:selected")[0].value;
