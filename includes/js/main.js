@@ -4,8 +4,11 @@ $(document).ready(function () {
     //Laden der Dozenten in die Liste
     getDozenten();
 
-
+    setTimeout(10000);
+    console.log(vm);
 });
+
+
 
 
 
@@ -76,3 +79,5 @@ function handleDataset(dataset) {
     //Hier in Kalender einfügen...
 
 }
+
+
