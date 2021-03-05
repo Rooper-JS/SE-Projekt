@@ -6,7 +6,7 @@ First-Steps:
 	->im Verzeichnis SE-Projekt/RestAPI cmd starten und Befehl eingeben: <br>
 		npm install express
 -	Installieren von mssql über npm <br>
-		im Verzeichnis SE-Projekt/RestAPI cmd starten und Befehl eingeben: <br>
+		->im Verzeichnis SE-Projekt/RestAPI cmd starten und Befehl eingeben: <br>
 		npm install mssql <br>
 		Das ist der MS SQL Server Client mit welchem auf die Datenbank zugegriffen wird 
 -	Stundenplan-DB auf eurem DB-Server einspielen 
