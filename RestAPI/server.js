@@ -105,9 +105,7 @@ async function getDozenten(req, res) {
                 });
             });
         });
-
     }
-    
     res.send(await data);
 }
 
