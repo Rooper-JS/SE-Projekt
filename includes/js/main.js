@@ -45,13 +45,13 @@ function getDozenten() {
 
 
 function getDataset() {
-    //Event: Click #pullData Button
+    //Event: Change Select
 
     //DozentID auslesen
     var ID = $("#selDozent option:selected")[0].value;
 
-    //Woche auslesen (Anfangs- und Enddatum) und mitsenden
-    //......... TO DO  ..........
+    //Events löschen
+    vm.events = [];
 
     $.ajax({
 
@@ -77,6 +77,48 @@ function getDataset() {
 function handleDataset(dataset) {
 
     //Hier in Kalender einfügen...
+    $(dataset).each(function (index) {
+
+        var first = new Date(dataset[index].Tag);
+        var time_first = new Date(dataset[index].start);
+        var hh = time_first.getHours()-1;
+        var mm = time_first.getMinutes();
+        first.setHours(hh);
+        first.setMinutes(mm);
+        
+
+        console.log("First:" + first);
+
+        var second = new Date(dataset[index].Tag);
+        var time_second = new Date(dataset[index].ende)
+        var hh = time_second.getHours()-1;
+        var mm = time_second.getMinutes();
+        second.setHours(hh);
+        second.setMinutes(mm);
+
+        var name = dataset[index].NutzungsID + ' \n' + dataset[index].OrtsID;
+
+        newEvent(first, second, name);
+
+
+    });
+
+}
+
+function newEvent(first, second, name) {
+
+    //const first = new Date("03.09.2021 8:00");
+    //const second = new Date("03.09.2021 9:30");
+    //var name = "Hildegard \nRaum 303";
+
+    vm.events.push({
+        name: name,
+       
+        start: first,
+        end: second,
+        color: "red",
+        timed: 2,
+    })
 
 }
 

@@ -16,22 +16,21 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-    <link rel="stylesheet" src="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/main.css">
     
 </head>
 <body>
 
     
-    <div class="" style="margin:20px;">
+    <div class="control_container" style="margin:20px;">
 
-        <v-select id="selDozent" class="round" style="border: solid silver 1px; border-radius:5px;">
+        <select onchange="getDataset()" id="selDozent" class="round" style="border: solid silver 1px; border-radius:5px;">
             <option selected value="std">--- Bitte auswählen ---</option>
-        </v-select>
-        <button id="pullData" onclick="getDataset()" style="border: solid silver 1px;border-radius: 5px; scrollbar-arrow-color:black;">KLICK MICH</button>
+        </select>
 
     </div>
 
-    <div id="app">
+    <div id="app" class="cal_container" >
         <v-app id="inspire">
             <v-row class="fill-height">
                 <v-col>
@@ -100,8 +99,10 @@
                                     v-model="focus"
                                     :weekdays="weekday"
                                     color="primary"
+                                    :dark ="true"
                                     :events="events"
                                     :event-color="getEventColor"
+                                    
                                     :type="type"
                                     @click:event="showEvent"
                                     @click:more="viewDay"
@@ -173,7 +174,7 @@
                 selectedOpen: false,
                 events: [],
                 colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-                names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+                
             }),
             mounted() {
                 this.$refs.calendar.checkChange()
@@ -214,29 +215,10 @@
                     nativeEvent.stopPropagation()
                 },
                 updateRange({ start, end }) {
-                    alert("test");
+                    //onChange-Funktion für Kalender
                     const events = []
 
-                    const min = new Date(`${start.date}T00:00:00`)
-                    const max = new Date(`${end.date}T23:59:59`)
-                    const days = (max.getTime() - min.getTime()) / 86400000
-                    const eventCount = this.rnd(days, days + 20)
-
-                    for (let i = 0; i < eventCount; i++) {
-                        const allDay = this.rnd(0, 3) === 0
-                        const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-                        const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-                        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-                        const second = new Date(first.getTime() + secondTimestamp)
-
-                        events.push({
-                            name: this.names[this.rnd(0, this.names.length - 1)],
-                            start: first,
-                            end: second,
-                            color: this.colors[this.rnd(0, this.colors.length - 1)],
-                            timed: !allDay,
-                        })
-                    }
+                    
 
                     this.events = events
                 },

@@ -14,3 +14,21 @@ select.round:focus {
     border-color: green;
     outline: 0;
 }
+
+div.cal_container {
+
+    margin: 100px;
+
+}
+
+.control_container {
+
+   margin: 50px;
+   
+}
+
+.pl-1 {
+
+    white-space: pre;
+
+}

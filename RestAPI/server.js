@@ -60,7 +60,10 @@ function SQLgetLessons(ID) {
 
             // query to the database and get the records
             request.input('DozentID', sql.VarChar, id);
-            request.query('select DozentID, NutzungsID, OrtsID, Tag, Stunde from Unterricht where DozentID = @DozentID', function (err, recordset) {
+            request.query('select DozentID, NutzungsID, OrtsID, Tag, s.Anfang as start,  s.Ende as ende ' +
+                'from Unterricht u Left Join Stunde s on s.Stunde = u.Stunde ' +
+                'where DozentID = @DozentID',
+                function (err, recordset) {
 
                 if (err) {
                     console.log(err);
