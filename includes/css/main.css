@@ -18,7 +18,10 @@ select.round:focus {
 div.cal_container {
 
     margin: 100px;
-
+    margin-top: 20px;
+    margin-bottom:0px;
+    border: solid silver 2px;
+    border-radius:15px;
 }
 
 .control_container {

@@ -95,11 +95,11 @@
                         </v-toolbar>
                     </v-sheet>
                     <v-sheet height="600">
-                        <v-calendar ref="calendar"
+                        <v-calendar 
+                                    ref="calendar"
                                     v-model="focus"
                                     :weekdays="weekday"
                                     color="primary"
-                                    :dark ="true"
                                     :events="events"
                                     :event-color="getEventColor"
                                     
