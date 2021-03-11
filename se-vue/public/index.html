@@ -8,6 +8,7 @@
     <title>Stundenplan</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/static/js/main.js"></script>
+    <script src="/static/js/FileSaver.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
@@ -17,7 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/main.css">
-    
+
 </head>
 <body>
 
@@ -27,6 +28,8 @@
         <select onchange="getDataset()" id="selDozent" class="round" style="border: solid silver 1px; border-radius:5px;">
             <option selected value="std">--- Bitte auswählen ---</option>
         </select>
+
+        <button id="downloadICS" onclick="downloadICS()">Download *.ics</button>
 
     </div>
 
