@@ -86,7 +86,10 @@ async function getDozenten(req, res) {
 
             sql.connect(config, function (err) {
 
-                if (err) console.log(err);
+                if (err) {
+                    resolve(err);
+                    return 0;
+                }
 
                 // create Request object
                 var request = new sql.Request();
@@ -94,16 +97,25 @@ async function getDozenten(req, res) {
                 // query to the database and get the records
                 request.query('select titel, vorname, name, DozentID, FachbereichID FROM dozent order by name, vorname, DozentID', function (err, recordset) {
 
-                    if (err) {
-                        console.log(err);
-                        reject(err);
+                    
+                    if (recordset == undefined) {
+                        
+                        return "null";
                     }
 
+                    console.log(recordset);
+                    if (recordset == undefined) {
+
+                        resolve(undefined);
+                        return;
+                    }
                     // send records as a response
                     resolve(recordset.recordset);
 
                 });
             });
+        }).catch(() => {
+            
         });
     }
     res.send(await data);

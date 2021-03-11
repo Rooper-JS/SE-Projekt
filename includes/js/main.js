@@ -24,6 +24,12 @@ function getDozenten() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
+            
+            if (data.name == "ConnectionError") {
+                
+                alert("Fehler bei der Verbindung mit dem Datenbank-Server!");
+                return;
+            }
 
             //Dozenten als <option> in <select>
             data.forEach(function (item) {
@@ -41,7 +47,9 @@ function getDozenten() {
 
         },
         error: function (request, error) {
-            alert("Request: " + JSON.stringify(request));
+
+            alert("Fehler bei der Verbindung mit dem Datenbank-Server!");
+
         }
     });
 }
