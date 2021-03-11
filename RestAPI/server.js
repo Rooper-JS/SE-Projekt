@@ -3,14 +3,11 @@ var express = require('express');
 var app = express();
 var sql = require('mssql')
 var path = require('path');
+var db = require('./../db_config.js');
 
-//DB-Config
-var config = {
-    user: 'wwwstdplan',
-    password: 'Key123',
-    server: 'localhost',
-    database: 'stundenplan'
-};
+var config = db_config;
+
+
 
 //Main-Path
 var dir = __dirname;

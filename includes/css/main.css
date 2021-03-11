@@ -35,3 +35,9 @@ div.cal_container {
     white-space: pre;
 
 }
+
+#downloadICS {
+    border: solid silver 1px;
+    margin-left: 40px;
+
+}
