@@ -40,7 +40,7 @@
                                    class="mr-4"
                                    color="grey darken-2"
                                    @click="setToday">
-                                Today
+                                Heute
                             </v-btn>
                             <v-btn fab
                                    text
@@ -79,17 +79,15 @@
                                 </template>
                                 <v-list>
                                     <v-list-item @click="type = 'day'">
-                                        <v-list-item-title>Day</v-list-item-title>
+                                        <v-list-item-title>Tag</v-list-item-title>
                                     </v-list-item>
                                     <v-list-item @click="type = 'week'">
-                                        <v-list-item-title>Week</v-list-item-title>
+                                        <v-list-item-title>Woche</v-list-item-title>
                                     </v-list-item>
                                     <v-list-item @click="type = 'month'">
-                                        <v-list-item-title>Month</v-list-item-title>
+                                        <v-list-item-title>Monat</v-list-item-title>
                                     </v-list-item>
-                                    <v-list-item @click="type = '4day'">
-                                        <v-list-item-title>4 days</v-list-item-title>
-                                    </v-list-item>
+                                   
                                 </v-list>
                             </v-menu>
                         </v-toolbar>
@@ -104,6 +102,8 @@
                                     :event-color="getEventColor"
                                     
                                     :type="type"
+                                    :interval-format="intervalFormat"
+                                    :weekday-format="getDay"
                                     @click:event="showEvent"
                                     @click:more="viewDay"
                                     @click:date="viewDay"
@@ -150,6 +150,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script>
+        const daysOfWeek = ['So','Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+        
+
         var vm = new Vue({
             el: '#app',
             vuetify: new Vuetify(),
@@ -157,17 +160,17 @@
                 focus: '',
                 type: 'week',
                 typeToLabel: {
-                    month: 'Month',
-                    week: 'Week',
-                    day: 'Day',
-                    '4day': '4 Days',
+                    month: 'Monat',
+                    week: 'Woche',
+                    day: 'Tag',
+                    
                 },
                 selectedEvent: {},
                 selectedElement: null,
                 weekday: [1, 2, 3, 4, 5, 6, 0],
                 weekdays: [
                     { text: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
-                    { text: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
+                    { text: 'Mo, Di, Mi, Do, Fr, Sa, So', value: [1, 2, 3, 4, 5, 6, 0] },
                     { text: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
                     { text: 'Mon, Wed, Fri', value: [1, 3, 5] },
                 ],
@@ -197,34 +200,32 @@
                     this.$refs.calendar.next()
                 },
                 showEvent({ nativeEvent, event }) {
-                    const open = () => {
-                        this.selectedEvent = event
-                        this.selectedElement = nativeEvent.target
-                        setTimeout(() => {
-                            this.selectedOpen = true
-                        }, 10)
-                    }
-
-                    if (this.selectedOpen) {
-                        this.selectedOpen = false
-                        setTimeout(open, 10)
-                    } else {
-                        open()
-                    }
-
-                    nativeEvent.stopPropagation()
+                   
                 },
                 updateRange({ start, end }) {
                     //onChange-Funktion für Kalender
-                    const events = []
+
+                    //const events = []
 
                     
-
-                    this.events = events
+                    if (events) {
+                        this.events = events
+                    }
+                    
                 },
                 rnd(a, b) {
                     return Math.floor((b - a + 1) * Math.random()) + a
                 },
+                intervalFormat(interval) {
+                    return interval.time;
+                },
+                getDay(date) {
+                    console.log(date);
+                    let i = date.weekday;
+                    console.log(i);
+                    return daysOfWeek[i];
+                }
+
             },
         });
     </script>

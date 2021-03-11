@@ -113,11 +113,10 @@ function newEvent(first, second, name) {
 
     vm.events.push({
         name: name,
-       
         start: first,
         end: second,
         color: "red",
-        timed: 2,
+        timed: 2
     })
 
 }
