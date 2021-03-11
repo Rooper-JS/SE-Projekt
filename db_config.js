@@ -1,6 +1,6 @@
 db_config = {
     user: 'wwwstdplan',
-    password: 'Key1234',
+    password: 'Key123',
     server: 'localhost',
     database: 'stundenplan'
 };
