@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>Stundenplan</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/FileSaver.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/main.css">
+
+</head>
+<body>
+
+    
+    <div class="control_container" style="margin:20px;">
+
+        <select onchange="getDataset()" id="selDozent" class="round" style="border: solid silver 1px; border-radius:5px;">
+            <option selected value="std">--- Bitte auswählen ---</option>
+        </select>
+
+        <button id="downloadICS" onclick="downloadICS()" >Download *.ics</button>
+
+    </div>
+
+    <div id="app" class="cal_container" >
+        <v-app id="inspire">
+            <v-row class="fill-height">
+                <v-col>
+                    <v-sheet height="64">
+                        <v-toolbar flat>
+                            <v-btn outlined
+                                   class="mr-4"
+                                   color="grey darken-2"
+                                   @click="setToday">
+                                Heute
+                            </v-btn>
+                            <v-btn fab
+                                   text
+                                   small
+                                   color="grey darken-2"
+                                   @click="prev">
+                                <v-icon small>
+                                    mdi-chevron-left
+                                </v-icon>
+                            </v-btn>
+                            <v-btn fab
+                                   text
+                                   small
+                                   color="grey darken-2"
+                                   @click="next">
+                                <v-icon small>
+                                    mdi-chevron-right
+                                </v-icon>
+                            </v-btn>
+                            <v-toolbar-title v-if="$refs.calendar">
+                                {{ $refs.calendar.title }}
+                            </v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-menu bottom
+                                    right>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn outlined
+                                           color="grey darken-2"
+                                           v-bind="attrs"
+                                           v-on="on">
+                                        <span>{{ typeToLabel[type] }}</span>
+                                        <v-icon right>
+                                            mdi-menu-down
+                                        </v-icon>
+                                    </v-btn>
+                                </template>
+                                <v-list>
+                                    <v-list-item @click="type = 'day'">
+                                        <v-list-item-title>Tag</v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item @click="type = 'week'">
+                                        <v-list-item-title>Woche</v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item @click="type = 'month'">
+                                        <v-list-item-title>Monat</v-list-item-title>
+                                    </v-list-item>
+                                   
+                                </v-list>
+                            </v-menu>
+                        </v-toolbar>
+                    </v-sheet>
+                    <v-sheet height="600">
+                        <v-calendar 
+                                    ref="calendar"
+                                    v-model="focus"
+                                    :weekdays="weekday"
+                                    color="primary"
+                                    :events="events"
+                                    :event-color="getEventColor"
+                                    
+                                    :type="type"
+                                    :interval-format="intervalFormat"
+                                    :weekday-format="getDay"
+                                    @click:event="showEvent"
+                                    @click:more="viewDay"
+                                    @click:date="viewDay"
+                                    @change="updateRange"
+                                    id="calender"></v-calendar>
+                        <v-menu v-model="selectedOpen"
+                                :close-on-content-click="false"
+                                :activator="selectedElement"
+                                offset-x>
+                            <v-card color="grey lighten-4"
+                                    min-width="350px"
+                                    flat>
+                                <v-toolbar :color="selectedEvent.color"
+                                           dark>
+                                    <v-btn icon>
+                                        <v-icon>mdi-pencil</v-icon>
+                                    </v-btn>
+                                    <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                                    <v-spacer></v-spacer>
+                                    <v-btn icon>
+                                        <v-icon>mdi-heart</v-icon>
+                                    </v-btn>
+                                    <v-btn icon>
+                                        <v-icon>mdi-dots-vertical</v-icon>
+                                    </v-btn>
+                                </v-toolbar>
+                                <v-card-text>
+                                    <span v-html="selectedEvent.details"></span>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-btn text
+                                           color="secondary"
+                                           @click="selectedOpen = false">
+                                        Cancel
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-menu>
+                    </v-sheet>
+                </v-col>
+            </v-row>
+        </v-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+        const daysOfWeek = ['So','Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+        
+
+        var vm = new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            data: () => ({
+                focus: '',
+                type: 'week',
+                typeToLabel: {
+                    month: 'Monat',
+                    week: 'Woche',
+                    day: 'Tag',
+                    
+                },
+                selectedEvent: {},
+                selectedElement: null,
+                weekday: [1, 2, 3, 4, 5, 6, 0],
+                weekdays: [
+                    { text: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
+                    { text: 'Mo, Di, Mi, Do, Fr, Sa, So', value: [1, 2, 3, 4, 5, 6, 0] },
+                    { text: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
+                    { text: 'Mon, Wed, Fri', value: [1, 3, 5] },
+                ],
+                selectedOpen: false,
+                events: [],
+                colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
+                
+            }),
+            mounted() {
+                this.$refs.calendar.checkChange()
+            },
+            methods: {
+                viewDay({ date }) {
+                    this.focus = date
+                    this.type = 'day'
+                },
+                getEventColor(event) {
+                    return event.color
+                },
+                setToday() {
+                    this.focus = ''
+                },
+                prev() {
+                    this.$refs.calendar.prev()
+                },
+                next() {
+                    this.$refs.calendar.next()
+                },
+                showEvent({ nativeEvent, event }) {
+                   
+                },
+                updateRange({ start, end }) {
+                    //onChange-Funktion für Kalender
+
+                    //const events = []
+
+                    
+                    if (events) {
+                        this.events = events
+                    }
+                    
+                },
+                rnd(a, b) {
+                    return Math.floor((b - a + 1) * Math.random()) + a
+                },
+                intervalFormat(interval) {
+                    return interval.time;
+                },
+                getDay(date) {
+                    console.log(date);
+                    let i = date.weekday;
+                    console.log(i);
+                    return daysOfWeek[i];
+                }
+
+            },
+        });
+    </script>
+
+</body>
+</html>
