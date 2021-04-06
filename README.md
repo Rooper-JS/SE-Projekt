@@ -1,7 +1,7 @@
-#**How to install on your local machine or server**
+**How to install on your local machine or server**
 
 -	install nodeJS (https://nodejs.org/en/download/)
--	optinal: Enter the environment variable for nodejs in the PATH
+-	optinal: Enter the environment variable for nodejs in the PATH variable
 -	go to path SE-Projekt/RestAPI and type *npm install* to install all the necesary packages from node <br>
 -	go to path SE-Projekt/se-vue and type *npm install*
 -	now add the "Stundenplan" database to your database server
