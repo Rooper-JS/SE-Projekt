@@ -1,15 +1,10 @@
-First-Steps:
+#**How to install on your local machine or server**
 
--	NodeJS installieren (https://nodejs.org/en/download/)
--	Umgebungsvariable für nodejs ins PATH eintragen
--	Installieren von Express über npm <br>
-	->im Verzeichnis SE-Projekt/RestAPI cmd starten und Befehl eingeben: <br>
-		npm install express
--	Installieren von mssql über npm <br>
-		->im Verzeichnis SE-Projekt/RestAPI cmd starten und Befehl eingeben: <br>
-		npm install mssql <br>
-		Das ist der MS SQL Server Client mit welchem auf die Datenbank zugegriffen wird 
--	Stundenplan-DB auf eurem DB-Server einspielen 
--	In der server.js müssen ggf. die Anmeldedaten zur DB angepasst werden
--	Ins Verzeichnis SE-Projekt/RestAPI und CMD starten. Jetzt mit folgenden Befehl den Server starten: node server.js
--	Im Browser http://localhost:8080 aufrufen 
+-	install nodeJS (https://nodejs.org/en/download/)
+-	optinal: Enter the environment variable for nodejs in the PATH
+-	go to path SE-Projekt/RestAPI and type *npm install* to install all the necesary packages from node <br>
+-	go to path SE-Projekt/se-vue and type *npm install*
+-	now add the "Stundenplan" database to your database server
+-	Next, open the server.js file and enter the correct login details (a new user may have to be created)
+-	to start the service go to path SE-Projekt/RestAPI and type *node server.js*
+-	Open http://localhost:8080 
