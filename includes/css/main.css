@@ -23,7 +23,7 @@ select {
     border: none;
     -moz-padding-start: calc(10px - 3px);
     width: 20%;
-    min-width:200px;
+    min-width:240px;
     height: 40px;
     -moz-padding-start: calc(10px - 3px);
     padding-left: 10px;
@@ -38,7 +38,7 @@ select {
 }
 
 select option {
-    color: #666;
+    color: white;
 }
 
 select:focus::-ms-value {
@@ -52,6 +52,8 @@ div.main {
     background-color: yellowgreen;
     margin-top:-10px;
     padding-top:-10px;
+    height:100%;
+    padding-bottom:50%;
 
 
 }
@@ -60,9 +62,10 @@ div.cal_container {
 
     margin: 5%;
     margin-top: -20px;
-    margin-bottom:0px;
+    margin-bottom:40px;
     border: solid silver 6px;
     border-radius:5px;
+    height:50%;
     
 }
 
