@@ -15,18 +15,64 @@ select.round:focus {
     outline: 0;
 }
 
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    -moz-padding-start: calc(10px - 3px);
+    width: 20%;
+    min-width:200px;
+    height: 40px;
+    -moz-padding-start: calc(10px - 3px);
+    padding-left: 10px;
+    background: green;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    outline: none;
+
+}
+
+select option {
+    color: #666;
+}
+
+select:focus::-ms-value {
+    background-color: transparent;
+}
+
+
+
+div.main {
+
+    background-color: yellowgreen;
+    margin-top:-10px;
+    padding-top:-10px;
+
+
+}
+
 div.cal_container {
 
-    margin: 100px;
-    margin-top: 20px;
+    margin: 5%;
+    margin-top: -20px;
     margin-bottom:0px;
-    border: solid silver 2px;
-    border-radius:10px;
+    border: solid silver 6px;
+    border-radius:5px;
+    
 }
 
 .control_container {
 
    margin: 50px;
+   margin-top:-10px;
+   padding-top:20px;
+   padding-left:20px;
+   
    
 }
 
@@ -39,5 +85,21 @@ div.cal_container {
 #downloadICS {
     border: solid silver 1px;
     margin-left: 40px;
-
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    -moz-padding-start: calc(10px - 3px);
+    width: 10%;
+    min-width:150px;
+    height: 40px;
+    -moz-padding-start: calc(10px - 3px);
+    padding-left: 10px;
+    background: green;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    outline: none;
 }
