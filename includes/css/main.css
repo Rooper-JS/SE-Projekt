@@ -23,6 +23,7 @@ select {
     border: none;
     -moz-padding-start: calc(10px - 3px);
     width: 20%;
+    min-width:200px;
     height: 40px;
     -moz-padding-start: calc(10px - 3px);
     padding-left: 10px;
@@ -90,6 +91,7 @@ div.cal_container {
     border: none;
     -moz-padding-start: calc(10px - 3px);
     width: 10%;
+    min-width:150px;
     height: 40px;
     -moz-padding-start: calc(10px - 3px);
     padding-left: 10px;
