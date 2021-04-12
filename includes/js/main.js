@@ -4,10 +4,6 @@ $(document).ready(function () {
     //Laden der Dozenten in die Liste
     getDozenten();
 
-    setTimeout(10000);
-    console.log(vm);
-
-    //var ics_file = ics();
 
 });
 
